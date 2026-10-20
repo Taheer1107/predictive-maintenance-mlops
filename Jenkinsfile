@@ -3,19 +3,19 @@ pipeline {
   triggers { pollSCM('H/5 * * * *') }
   stages {
     stage('Setup') {
-      steps { sh 'python3 -m venv venv && . venv/bin/activate && pip install -r requirements.txt' }
+      steps { bat 'python -m venv venv && venv\\Scripts\\pip install -r requirements.txt' }
     }
     stage('Train') {
-      steps { sh '. venv/bin/activate && python src/train.py' }
+      steps { bat 'venv\\Scripts\\python src\\train.py' }
     }
     stage('Quality gate') {
-      steps { sh '. venv/bin/activate && python src/gate.py' }
+      steps { bat 'venv\\Scripts\\python src\\gate.py' }
     }
     stage('Export model') {
-      steps { sh '. venv/bin/activate && python src/export_best.py' }
+      steps { bat 'venv\\Scripts\\python src\\export_best.py' }
     }
     stage('Build image') {
-      steps { sh 'docker build -t pm-api:${BUILD_NUMBER} .' }
+      steps { bat 'docker build -t pm-api:%BUILD_NUMBER% .' }
     }
   }
 }
