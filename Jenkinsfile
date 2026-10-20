@@ -3,12 +3,11 @@ pipeline {
   triggers { pollSCM('H/5 * * * *') }
   options { disableConcurrentBuilds() }
   environment {
-    // Adjust if Python is installed elsewhere; delete this line if python is already on the service's PATH
-    PATH = "C:\\Program Files\\Python311;C:\\Program Files\\Python311\\Scripts;${env.PATH}"
+    PY = 'C:\\Users\\Mohamed Taheer\\AppData\\Local\\Programs\\Python\\Python311\\python.exe'
   }
   stages {
     stage('Setup') {
-      steps { bat 'python --version && python -m venv venv && venv\\Scripts\\python -m pip install -r requirements.txt' }
+      steps { bat '"%PY%" --version && "%PY%" -m venv venv && venv\\Scripts\\python -m pip install -r requirements.txt' }
     }
     stage('Train') {
       steps { bat 'venv\\Scripts\\python src\\train.py' }
