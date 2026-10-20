@@ -1,0 +1,8 @@
+venv/
+mlruns/
+logs/
+model/
+__pycache__/
+*.pkl
+data/raw/*
+!data/raw/*FD001.txt

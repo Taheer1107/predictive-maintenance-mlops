@@ -1,0 +1,7 @@
+venv/
+mlruns/
+data/
+logs/
+__pycache__/
+.git/
+*.pkl
