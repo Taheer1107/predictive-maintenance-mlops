@@ -9,7 +9,7 @@ def nasa_score(y, p):
     d = p - y
     return float(np.sum(np.where(d < 0, np.exp(-d / 13) - 1, np.exp(d / 10) - 1)))
 
-tr, te = load_train(path=r"D:\CMAPSSData"), load_test(path=r"D:\CMAPSSData")
+tr, te = load_train(), load_test()
 Xtr, ytr, Xte, yte = tr[FEATURES], tr["RUL"], te[FEATURES], te["RUL"].clip(upper=125)
 
 models = {
