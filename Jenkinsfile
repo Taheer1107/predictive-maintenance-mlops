@@ -12,7 +12,7 @@ pipeline {
 
     environment {
         PY = 'C:\\Users\\Mohamed Taheer\\AppData\\Local\\Programs\\Python\\Python311\\python.exe'
-        ACR = 'mldockerimages123.azurecr.io'
+        ACR = 'mldokeimages123=.azurecr.io'
     }
 
     stages {
@@ -76,5 +76,31 @@ pipeline {
                 }
             }
         }
+
+
+      stage('Build and push UI') {
+         steps {
+          withCredentials([
+          usernamePassword(
+        credentialsId: 'acr-credentials',
+        usernameVariable: 'ACR_USER',
+        passwordVariable: 'ACR_PASS'
+      )
+    ]) {
+      bat '''
+        echo %ACR_PASS%| docker login %ACR% -u %ACR_USER% --password-stdin
+        if errorlevel 1 exit /b 1
+
+        docker build -f Dockerfile.ui -t %ACR%/pm-ui:latest .
+        if errorlevel 1 exit /b 1
+
+        docker push %ACR%/pm-ui:latest
+        if errorlevel 1 exit /b 1
+
+        docker logout %ACR%
+      '''
+    }
+  }
+}
     }
 }
