@@ -2,14 +2,13 @@ import os
 
 import requests, pandas as pd, streamlit as st
 import plotly.graph_objects as go
-api = st.sidebar.text_input("API URL", os.getenv("API_URL", "http://127.0.0.1:8000"))
 
 st.set_page_config(page_title="Predictive Maintenance", layout="wide")
 
 COLS = ["unit", "cycle"] + [f"op{i}" for i in range(1, 4)] + [f"s{i}" for i in range(1, 22)]
 SENSORS = ["s2", "s3", "s4", "s7", "s8", "s9", "s11", "s12", "s13", "s14", "s15", "s17", "s20", "s21"]
 
-api = st.sidebar.text_input("API URL", "http://127.0.0.1:8000")
+api = st.sidebar.text_input("API URL", os.getenv("https://mlops-backend-buhbahgpd3hng0dn.centralindia-01.azurewebsites.net", "http://127.0.0.1:8000"), key="api_url")
 st.sidebar.caption("Dataset: NASA C-MAPSS FD001 (test set)")
 
 @st.cache_data
