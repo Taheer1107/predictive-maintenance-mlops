@@ -1,5 +1,8 @@
+import os
+
 import requests, pandas as pd, streamlit as st
 import plotly.graph_objects as go
+api = st.sidebar.text_input("API URL", os.getenv("API_URL", "http://127.0.0.1:8000"))
 
 st.set_page_config(page_title="Predictive Maintenance", layout="wide")
 

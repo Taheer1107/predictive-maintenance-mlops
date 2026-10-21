@@ -1,6 +1,6 @@
 venv/
 mlruns/
-data/
+data/raw/train_*
 logs/
 __pycache__/
 .git/
