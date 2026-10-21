@@ -12,7 +12,7 @@ pipeline {
 
     environment {
         PY = 'C:\\Users\\Mohamed Taheer\\AppData\\Local\\Programs\\Python\\Python311\\python.exe'
-        ACR = 'mldokeimages123.azurecr.io'
+        ACR = 'mldockerimages123.azurecr.io'
     }
 
     stages {
